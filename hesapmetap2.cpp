@@ -9,7 +9,7 @@ int main()
     char islem;
     int sonuc = 0, x, y;
 
-    cout << "İslemi giriniz. isleminiz bitince nokta koyunuz: ";
+    cout << "İslemi giriniz. isleminiz bitince nokta koyunuz : ";  //enter harici herhangi bir şey olsa da olur. 
     cin >> x;
     sonuc = x;
 
