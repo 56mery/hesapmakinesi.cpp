@@ -50,3 +50,6 @@ int main()
 
     return 0;
 }
+
+//efendim etap2 yi iki üç kere kontrol ettim çalısıyor. derleyici farkindan midir acaba neden calismadi sizde.
+//ayrica burda da fixleme yapmam lazım farklı bir şeyler girince bozuluyor.
