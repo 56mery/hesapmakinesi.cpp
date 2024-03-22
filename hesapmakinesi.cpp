@@ -147,3 +147,10 @@ int main()
 
     return 0;
 }
+
+
+//sayi girilmeyen durumu kontrol için değişkeni char yapmam gerekiyor ama char aralığı long double a göre coook kucuk kalıyor
+//yani o yzden o kismi atlamamız gerekiyor galiba 
+//onun dısındaki tek sorunu yanlış veri girisinde ne kadar veri girersen o kadar yanlış girdiğini söylüyor 
+//hata vermiyor çalışıyor veriyi doğru kontrol ediyor ama mesela qwe yazınca üç kere "geçersiz ..." diyor
+//sadece q yazarsan sadece bir kere diyor nedenini çözemedim
