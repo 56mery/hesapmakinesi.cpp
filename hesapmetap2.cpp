@@ -7,7 +7,7 @@ int main()
 {
 
     char islem;
-    int sonuc = 0, x, y;
+    long double sonuc = 0, x, y;
 
     cout << "İslemi giriniz. isleminiz bitince nokta koyunuz : ";  //enter harici herhangi bir şey olsa da olur. 
     cin >> x;
@@ -52,31 +52,42 @@ int main()
 }
 
 //efendim etap2 yi iki üç kere kontrol ettim çalısıyor. derleyici farkindan midir acaba neden calismadi sizde.
-//ayrica burda da fixleme yapmam lazım farklı bir şeyler girince bozuluyor.
 
 
-//bu da eskiden yapyığımı söylediğim kod(c ile yazilmiştim)
+/*  chatle yaptığımız kod ama hataları var hala protatip olarak kalsın diye koydum
 
-int main()
-{
-   char nick[10];
-   int d;
-   printf("dizinin uzunlugunu giriniz:");
-   scanf("%d" ,&d);
-   while(1){
-       if(d>10){
-       printf("dizi için boyut çok uzun. lütfen tekrar bir boyut giriniz:");
-       scanf("%d" ,&d);
-       }
-       else break;
-       
-   }
-   
- printf("bir nick giriniz:");
- scanf("%s" ,nick);
- printf("hi,%s" ,nick);
-   
-   
+#include <iostream>
+using namespace std;
+
+int main() {
+    char islem;
+    long double sonuc = 0, x = 0, y = 0;
+
+    cout << "İslemi giriniz. İşleminizi tamamladığınızda Enter'a basınız: ";
+    cin >> sonuc; 
+    
+    
+    while (cin.get(islem) && islem != '\n') {
+        if (islem == '+' || islem == '-' || islem == '*' || islem == '/') {
+            cin >> y;
+            if (islem == '+') {
+                sonuc += y;
+            } else if (islem == '-') {
+                sonuc -= y;
+            } else if (islem == '*') {
+                sonuc *= y;
+            } else if (islem == '/') {
+                sonuc /= y;
+            }
+        } else {
+            
+            cout << "Geçersiz işlem! Program sonlandırılıyor." << endl;
+            //return 1;
+        }
+    }
+
+    cout << "Sonuç: " << sonuc << endl;
 
     return 0;
 }
+*/
