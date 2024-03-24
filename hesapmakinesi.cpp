@@ -4,153 +4,86 @@
 #include <cstring>
 using namespace std;
 
+long double answer(long double x, char *islem, long double y)
+{
+    long double sonuc = 0;
+
+    switch (*islem)
+    {
+    case '+':sonuc = (x + y); break;
+    case '-':sonuc = (x - y); break;
+    case '*': sonuc = (x * y); break;
+    case '/':sonuc = (x / y); break;
+    default: sonuc = 0;       break;
+    }
+
+    if (sonuc == 0)
+    {
+        cout << "Geçersiz işlem girdiniz. Tekrar deneyiniz: "; //islem var mı yok mu kontrol eder
+        cin >> islem;
+        sonuc = answer(x, islem, y);
+    }
+
+    return sonuc;
+}
+
+long double tekrar(long double sonuc)
+{
+    char islem[1], dizi1[5];
+    long double z = 0, cevap = 0;
+
+    cout << "isleminizi giriniz: ";
+    cin >> islem;
+    cout << "diger sayiyi giriniz: ";
+    cin >> z;
+    cevap = answer(sonuc, islem, z);
+    cout << cevap << endl;
+    cout << cevap << " sonucundan devam etmek ister misiniz?" << endl;
+    cin >> dizi1;
+    if (strcmp(dizi1, "evet") == 0)
+    {
+        cevap = tekrar(cevap);
+    }
+    else if (strcmp(dizi1, "hayir") == 0)
+        return 0;
+}
+
 int main()
 {
-    char dizi1[10], dizi2[10];
-    char islem;
-    long double sonuc = 0, x, y, z;
-    cout << "\t\t\t\t\t~~Hesap Makinesi~~" << endl;
+    long double x = 0, y = 0, snc = 0;
+    char islem[1], dizi1[5], dizi2[5];
 
     while (1)
     {
-        cout << "İlk sayiyi giriniz: ";
+        cout << "İlk sayıyı giriniz: ";
         cin >> x;
-        cout << "Diger sayiyi giriniz: ";
-        cin >> y;
-        cout << "Yapmak istediginiz islemi giriniz: ";
+        cout << "Yapmak istediğiniz işlemi giriniz: ";  //burada random bir sey girilirse program hatayi yakalar
         cin >> islem;
+        cout << "Diğer sayıyı giriniz: ";
+        cin >> y;
 
-        while (1)
+        snc = answer(x, islem, y);
+        cout << snc << endl;
+        cout << snc << " sonucundan devam etmek ister misiniz?" << endl;
+        cin >> dizi1;
+
+        if (strcmp(dizi1, "evet") == 0)
+            snc = tekrar(snc);
+        else if (strcmp(dizi1, "hayir") == 0)
+            snc = 0;
+
+        if (snc == 0)
         {
-            if (islem == '+' || islem == '-' || islem == '*' || islem == '/')
-            {
-                break;
-            }
-            else
-            {
-                cout << "Olmayan islem girdiniz. Tekrar deneyiniz:  ";
-                cin >> islem;
-            }
-        }
-
-        if (islem == '+')
-        {
-            sonuc = (x + y);
-            cout << "sonuc: " << sonuc << endl;
-        }
-        if (islem == '-')
-        {
-            sonuc = (x - y);
-            cout << "sonuc: " << sonuc << endl;
-        }
-        if (islem == '*')
-        {
-            sonuc = (x * y);
-            cout << "sonuc: " << sonuc << endl;
-        }
-        if (islem == '/')
-        {
-            sonuc = (x / y);
-            cout << "sonuc: " << sonuc << endl;
-        }
-
-        while (1)
-        {
-            cout << sonuc << " sonucundan devam etmek ister misiniz? " << endl;
-            cin >> dizi1;
-
-            if (strcmp(dizi1, "hayir") == 0)
-                break;
-
-            else if (strcmp(dizi1, "evet") == 0)
-            {
-
-                cout << "Diğer sayiyi giriniz: ";
-                cin >> z;
-                cout << "Yapmak istediginiz islemi giriniz: ";
-                cin >> islem;
-
-                while (1)
-                {
-                    if (islem == '+' || islem == '-' || islem == '*' || islem == '/')
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        cout << "Olmayan islem girdiniz. Tekrar deneyiniz:  ";
-                        cin >> islem;
-                    }
-                }
-
-                if (islem == '+')
-                {
-                    sonuc = (sonuc + z);
-                    cout << "sonuc: " << sonuc << endl;
-                    continue;
-                }
-                if (islem == '-')
-                {
-                    sonuc = (sonuc - z);
-                    cout << "sonuc: " << sonuc << endl;
-                    continue;
-                }
-                if (islem == '*')
-                {
-                    sonuc = (sonuc * z);
-                    cout << "sonuc: " << sonuc << endl;
-                    continue;
-                }
-                if (islem == '/')
-                {
-                    sonuc = (sonuc / z);
-                    cout << "sonuc: " << sonuc << endl;
-                    continue;
-                }
-            }
-
-            else
-            {
-                cout << "Gecersiz cevap girdiniz. Evet ve ya hayir giriniz" << endl;
-                continue;
-            }
-        }
-
-        cout << "Hesap makinesini tekrar kullanmak ister misiniz? ";
-        cin >> dizi2;
-
-        if (strcmp(dizi2, "hayir") == 0)
-            break;
-
-        else if (strcmp(dizi2, "evet") == 0)
-            continue;
-
-        else
-        {
-            while (1)
-            {
-                cout << "Gecersiz cevap girdiniz. Evet ya da hayir'i deneyiniz: ";
-                cin >> dizi2;
-                if (strcmp(dizi2, "hayir") == 0)
-                    break;
-                else if (strcmp(dizi2, "evet") == 0)
-                    break;
-            }
-
+            cout << "hesap makinesi tekrar kullanmak ister misiniz: ";
+            cin >> dizi2;
             if (strcmp(dizi2, "evet") == 0)
                 continue;
-
-            else if (strcmp(dizi2, "hayir") == 0)
-                break;
+                else break;
         }
+        
     }
-
     return 0;
 }
 
 
-//sayi girilmeyen durumu kontrol için değişkeni char yapmam gerekiyor ama char aralığı long double a göre coook kucuk kalıyor
-//yani o yzden o kismi atlamamız gerekiyor galiba 
-//onun dısındaki tek sorunu yanlış veri girisinde ne kadar veri girersen o kadar yanlış girdiğini söylüyor 
-//hata vermiyor çalışıyor veriyi doğru kontrol ediyor ama mesela qwe yazınca üç kere "geçersiz ..." diyor
-//sadece q yazarsan sadece bir kere diyor nedenini çözemedim
+//evet hayirlarin ve sayilarin doğru girildiği varsayilan durum
