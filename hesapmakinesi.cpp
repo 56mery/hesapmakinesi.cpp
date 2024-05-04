@@ -3,10 +3,13 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
+int fa;
+void tekrar(long double sonuc);
 
 long double answer(long double x, char *islem, long double y)
 {
     long double sonuc = 0;
+    char islem2[2];
 
     switch (*islem)
     {
@@ -14,22 +17,31 @@ long double answer(long double x, char *islem, long double y)
     case '-':sonuc = (x - y); break;
     case '*': sonuc = (x * y); break;
     case '/':sonuc = (x / y); break;
-    default: sonuc = 0;       break;
+    default: { cout << "Geçersiz işlem girdiniz. Tekrar deneyiniz: ";
+    cin >> islem2;
+    sonuc=answer(x, islem2, y); break; }
     }
-
-    if (sonuc == 0)
-    {
-        cout << "Geçersiz işlem girdiniz. Tekrar deneyiniz: "; //islem var mı yok mu kontrol eder
-        cin >> islem;
-        sonuc = answer(x, islem, y);
-    }
-
     return sonuc;
 }
 
-long double tekrar(long double sonuc)
+int Devammi(long double sonuc){
+    char dizi[6],dizi1[6];
+    cout<<sonuc<<" sonucundan devam etmek ister misiniz? ";
+    cin>>dizi;
+    if(strcmp(dizi,"evet")==0) tekrar(sonuc);
+    
+    else if (strcmp(dizi,"hayir")==0){
+        cout<<"hesap makinesini tekrar kullanmak ister misiniz? ";
+        cin>>dizi1;
+        if(strcmp(dizi1,"evet")==0) {fa=1;}
+        else  fa=0;
+    }
+    return fa;
+}
+
+void tekrar(long double sonuc)
 {
-    char islem[1], dizi1[5];
+    char islem[2], dizi1[6];
     long double z = 0, cevap = 0;
 
     cout << "isleminizi giriniz: ";
@@ -38,52 +50,30 @@ long double tekrar(long double sonuc)
     cin >> z;
     cevap = answer(sonuc, islem, z);
     cout << cevap << endl;
-    cout << cevap << " sonucundan devam etmek ister misiniz?" << endl;
-    cin >> dizi1;
-    if (strcmp(dizi1, "evet") == 0)
-    {
-        cevap = tekrar(cevap);
-    }
-    else if (strcmp(dizi1, "hayir") == 0)
-        return 0;
+    Devammi(cevap);
 }
+
 
 int main()
 {
     long double x = 0, y = 0, snc = 0;
-    char islem[1], dizi1[5], dizi2[5];
+    char islem[2], dizi1[6], dizi2[6];
 
     while (1)
     {
         cout << "İlk sayıyı giriniz: ";
         cin >> x;
-        cout << "Yapmak istediğiniz işlemi giriniz: ";  //burada random bir sey girilirse program hatayi yakalar
+        cout << "Yapmak istediğiniz işlemi giriniz: ";
         cin >> islem;
         cout << "Diğer sayıyı giriniz: ";
         cin >> y;
-
         snc = answer(x, islem, y);
         cout << snc << endl;
-        cout << snc << " sonucundan devam etmek ister misiniz?" << endl;
-        cin >> dizi1;
-
-        if (strcmp(dizi1, "evet") == 0)
-            snc = tekrar(snc);
-        else if (strcmp(dizi1, "hayir") == 0)
-            snc = 0;
-
-        if (snc == 0)
-        {
-            cout << "hesap makinesi tekrar kullanmak ister misiniz: ";
-            cin >> dizi2;
-            if (strcmp(dizi2, "evet") == 0)
-                continue;
-                else break;
-        }
-        
+        fa=Devammi(snc);
+        if(fa==1) continue;
+        else break;        
     }
     return 0;
 }
 
-
-//evet hayirlarin ve sayilarin doğru girildiği varsayilan durum
+//Hesap makinesi bitmiş hali. 04/05/2024
